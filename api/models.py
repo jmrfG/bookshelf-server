@@ -1,4 +1,4 @@
-from . import db
+from api import db
 
 class Books(db.Model):
     idx = db.Column(db.Integer, primary_key=True)

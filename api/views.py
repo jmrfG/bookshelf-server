@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
-from . import db
-from .models import Books
+from api import db
+from api.models import Books
 
 main = Blueprint('main', __name__)
 
