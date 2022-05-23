@@ -1,4 +1,4 @@
-from api.models import Books
+from api.BookShelfDB import BookDB
 from api import db, create_app
 
 if __name__=="__main__":
