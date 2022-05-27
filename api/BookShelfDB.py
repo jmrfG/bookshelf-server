@@ -13,11 +13,11 @@ class BookDB:
             password=UPASS
         )
 
-    def insert(self, author, title):
+    def insert(self, author, title, tpages):
         status = "LISTA DE ESPERA" 
         try:
             cursor = self._db.cursor()
-            sql_statement = f"""INSERT into books values ({author},{title},{status})"""
+            sql_statement = rf"""INSERT into books (author, title, status, total_pages) values ('{author}','{title}','{status}', '{tpages}')"""
             cursor.execute(sql_statement)
             self._db.commit()
             return 200
@@ -29,6 +29,17 @@ class BookDB:
         try:
             #cursor = self._db.cursor()
             sql_statement = """select * from books"""
+            #cursor.execute(sql_statement)
+            #data = cursor.fetchall()
+            data = pd.read_sql_query(sql_statement, self._db)
+            return data.to_json(orient='records')
+        except:
+            return "Error"
+
+    def pull_filtered_data(self, where) -> dict:
+        try:
+            #cursor = self._db.cursor()
+            sql_statement = rf"""select * from books where status = '{where}'"""
             #cursor.execute(sql_statement)
             #data = cursor.fetchall()
             data = pd.read_sql_query(sql_statement, self._db)
