@@ -25,6 +25,18 @@ class BookDB:
             return 500
         
 
+    def update(self, id, field, value):
+        try:
+            cursor = self._db.cursor()
+            sql_statement = """Update books set {0} = %s where b_id = %s""".format(field)
+            cursor.execute(sql_statement, (value, id))
+            self._db.commit()
+            print("Commited")
+            if field == "page":
+                self.update_status()    
+        except:
+            print("Nao rolou")
+
     def pull_all_data(self) -> dict:
         try:
             #cursor = self._db.cursor()
@@ -46,8 +58,19 @@ class BookDB:
             return data.to_json(orient='records')
         except:
             return "Error"
-        
+
+    def update_status(self):
+        cursor = self._db.cursor()
+        sql_statement = """select b_id,page, total_pages from books"""
+        cursor.execute(sql_statement)
+        data = cursor.fetchall()
+        for b in data:
+            if b[1] != None and b[0] != b[2]:
+                self.update(b[0], "status", "ATIVO")
+            elif b[0] == b[2]:
+                self.update(b[0], "status", "CONCLUSO")
+            else:
+                pass
 
     def endConnection(self):
         self._db.close()
-

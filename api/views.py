@@ -16,7 +16,18 @@ def add_book():
         print("OK")
         return "200"
     except:
-        return 500
+        return "500"
+
+@main.route("/update_book", methods=['POST'])
+def update_book():
+    data = request.json
+    id, field, new_value = data[0], data[1], data[2]
+    db = BookDB()
+    try:
+        db.update(id, field, new_value)
+        return "200"
+    except:
+        return "500"
 
 @main.route("/get_all_books", methods=['GET'])
 def get_all_books():
