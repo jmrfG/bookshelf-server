@@ -17,7 +17,7 @@ class BookDB:
         status = "LISTA DE ESPERA" 
         try:
             cursor = self._db.cursor()
-            sql_statement = rf"""INSERT into books (author, title, status, total_pages) values ('{author}','{title}','{status}', '{tpages}')"""
+            sql_statement = rf"""INSERT into books (author, title, status, total_pages) values ('{author}','{title}','{status}', {tpages})"""
             cursor.execute(sql_statement)
             self._db.commit()
             return 200
@@ -34,6 +34,16 @@ class BookDB:
             print("Commited")
             if field == "page":
                 self.update_status()    
+        except:
+            print("Nao rolou")
+
+    def delete(self, id):
+        try:
+            cursor = self._db.cursor()
+            sql_statement = rf"""DELETE FROM books WHERE b_id = {id}"""
+            cursor.execute(sql_statement)
+            self._db.commit()
+            print("Commited")   
         except:
             print("Nao rolou")
 

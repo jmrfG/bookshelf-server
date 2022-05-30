@@ -9,10 +9,10 @@ main = Blueprint('main', __name__)
 @main.route("/add_book", methods=['POST'])
 def add_book():
     data = request.json
-    title, author = data['title'], data["author"]
+    title, author, tpages = data['title'], data["author"], data["pages"]
     db = BookDB()
     try:
-        db.insert(author, title)
+        db.insert(author, title, tpages)
         print("OK")
         return "200"
     except:
@@ -28,6 +28,19 @@ def update_book():
         return "200"
     except:
         return "500"
+
+@main.route("/delete_book", methods=['POST'])
+def delete_book():
+    data = request.json
+    id = data
+    db = BookDB()
+    try:
+        for i in id:
+            db.delete(i)
+        return "200"
+    except:
+        return "500"
+
 
 @main.route("/get_all_books", methods=['GET'])
 def get_all_books():
