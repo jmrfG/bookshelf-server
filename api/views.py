@@ -12,7 +12,7 @@ def add_book():
     title, author, tpages = data['title'], data["author"], data["pages"]
     db = BookDB()
     try:
-        db.insert(author, title, tpages)
+        db.insert(author, title, tpages.strip())
         print("OK")
         return "200"
     except:

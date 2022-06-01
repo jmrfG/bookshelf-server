@@ -75,9 +75,9 @@ class BookDB:
         cursor.execute(sql_statement)
         data = cursor.fetchall()
         for b in data:
-            if b[1] != None and b[0] != b[2]:
+            if b[1] != None and b[1] != b[2]:
                 self.update(b[0], "status", "ATIVO")
-            elif b[0] == b[2]:
+            elif b[1] == b[2]:
                 self.update(b[0], "status", "CONCLUSO")
             else:
                 pass
