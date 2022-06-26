@@ -12,13 +12,25 @@ This is the server side of a CRUD project used to register and track books that 
 
 # How to Run
 
-Prior to running the server side, you should install all the dependencies by running:
+Prior to running the server side, there are a couple of things you should do. 
+
+First, you should install all the dependencies by running:
 
 ``
     pip install -r requirements.txt
 ``
 
-Then, run the main.py file:
+
+Then, inside \api folder, create a file named config.py and set the following constants:
+
+``
+    HOST = <server host>
+    DATABASE = <db name>
+    USER = <user>
+    UPASS = <pwd>
+``
+
+Finally, run the main.py file:
 
 Note that, since the application works uppon a TCP/IP stack, it'll only function 100% correctly if the server side is already running.
 
