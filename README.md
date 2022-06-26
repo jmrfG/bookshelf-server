@@ -24,7 +24,7 @@ First, you should install all the dependencies by running:
 Then, inside \api folder, create a file named config.py and set the following constants:
 
 ``
-    HOST = <server host>
+    HOST = <server host> \n
     DATABASE = <db name>
     USER = <user>
     UPASS = <pwd>
